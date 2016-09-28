@@ -1,7 +1,5 @@
-# Write your code here!
 require 'pry'
 
-# Write your code here!
 def game_hash
   hash = {
     :home => {
@@ -119,121 +117,14 @@ def game_hash
   }
 end
 
-# def num_points_scored(str)
-#   points = nil
-#   game_hash.each do |location, team_data|
-#     team_data.each do |team_attribute, detail|
-#        if team_attribute == :players
-#          detail.each do |name, stats|
-#            if name == str
-#              points = stats[:points].to_i
-#            end
-#          end
-#        end
-#     end
-#   end
-#   points
-# end
-
 def num_points_scored(str)
   # get number of points for named player
   game_hash.values.map do |teams|
+    binding.pry
     if teams[:players].include?(str)
-      teams[:players][str][:points]
+      teams[:players][str][:points].to_i
     end
-  end.compact.join.to_i
+  end
 end
 
-def shoe_size(str)
-  shoe_size = nil
-  game_hash.each do |location, team_data|
-    team_data.each do |team_attribute, detail|
-       if team_attribute == :players
-         detail.each do |name, stats|
-           if name == str
-             shoe_size = stats[:shoe].to_i
-           end
-         end
-       end
-    end
-  end
-  shoe_size
-end
-
-def team_colors(str)
-  colors = nil
-  game_hash.each do |location, team_data|
-    team_data.each do |team_attribute, detail|
-       if detail == str
-         colors = team_data[:colors]
-       end
-    end
-  end
-  colors
-end
-
-def team_names
-  names = []
-  game_hash.each do |location, team_data|
-    team_data.each do |data, detail|
-      if data == :team_name
-        names << detail
-      end
-    end
-  end
-  names
-end
-
-def player_numbers(str)
-  numbers = []
-  game_hash.each do |location, team_details|
-     if team_details[:team_name] == str
-       team_details.each do |team_attribute, attribute_value|
-         if team_attribute == :players
-           attribute_value.each do |name, stats|
-             numbers << stats[:number].to_i
-           end
-         end
-       end
-     end
-   end
-   numbers.sort
- end
-
- def player_stats(str)
-  stats = {}
-  game_hash.each do |location, team_details|
-    team_details.each do |team_attribute, attribute_detail|
-      if team_attribute == :players
-        attribute_detail.each do |name, player_details|
-          if name == str
-            player_details.each do |key, value|
-              stats[key] = value.to_i
-            end
-          end
-        end
-      end
-    end
-  end
-  stats
- end
-
- def big_shoe_rebounds
-  biggest_shoe = 0
-  rebounds = 12
-  game_hash.each do |location, team_details|
-    team_details.each do |team_attribute, attribute_detail|
-      if team_attribute == :players
-        attribute_detail.each do |name, stats|
-          if stats[:shoe].to_i > biggest_shoe
-            biggest_shoe = stats[:shoe].to_i
-            stats[:rebounds] = rebounds
-          end
-        end
-      end
-    end
-  end
-  rebounds
- end
-
-big_shoe_rebounds
+num_points_scored("Alan Anderson")
